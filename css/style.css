@@ -369,6 +369,7 @@ p {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 3rem;
+    position: relative;
 }
 
 .logo {
@@ -410,7 +411,6 @@ p {
     height: 100%;
     display: flex;
     align-items: center;
-    position: relative;
 }
 
 .nav-link {
