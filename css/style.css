@@ -1312,6 +1312,14 @@ p {
 
 /* 9. SUBPAGE DETAILS & TYPICAL COMPONENTS */
 
+#programm-schedule {
+    padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+
+#programm-ziele {
+    padding-top: clamp(2rem, 4vw, 4rem);
+}
+
 .subpage-hero {
     background-size: cover;
     background-position: center;
