@@ -99,9 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileParentItems.forEach(item => {
         item.addEventListener('click', (e) => {
             if (window.innerWidth <= 1024) {
-                e.preventDefault();
-                const parent = item.parentElement;
-                parent.classList.toggle('mobile-expand');
+                // If user clicks specifically on the chevron arrow, expand/collapse the accordion sub-menu
+                if (e.target.classList.contains('nav-chevron') || e.target.closest('.nav-chevron')) {
+                    e.preventDefault();
+                    const parent = item.parentElement;
+                    parent.classList.toggle('mobile-expand');
+                } else {
+                    // Click on the text itself navigates to the section!
+                    // Let the default navigation happen naturally, the router will handle closing the menu.
+                }
             }
         });
     });
