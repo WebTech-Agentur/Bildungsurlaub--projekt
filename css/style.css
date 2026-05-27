@@ -899,6 +899,11 @@ p {
 }
 
 @media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 3rem);
+        word-wrap: break-word;
+        hyphens: auto;
+    }
     .hero-buttons {
         flex-direction: column;
         width: 100%;
@@ -1526,11 +1531,13 @@ p {
     border-radius: 8px;
     box-shadow: var(--shadow-premium);
     transition: var(--transition-smooth);
+    border: 1px solid rgba(15, 36, 26, 0.04);
 }
 
 .goal-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-hover);
+    border-color: var(--color-sage);
 }
 
 .goal-icon-wrap {
@@ -1543,6 +1550,15 @@ p {
     justify-content: center;
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
+    transition: var(--transition-smooth);
+}
+
+.goal-card:hover .goal-icon-wrap {
+    background-color: var(--color-dark-green);
+}
+
+.goal-card:hover .goal-icon-wrap i {
+    color: var(--color-bronze) !important;
 }
 
 .goal-card h4 {
