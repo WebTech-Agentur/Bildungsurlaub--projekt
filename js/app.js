@@ -3,6 +3,7 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    const isEn = document.documentElement.lang === 'en';
 
     /* ==========================================
        1. CLIENT-SIDE SPA ROUTER
@@ -143,135 +144,167 @@ document.addEventListener('DOMContentLoaded', () => {
     const resDocument = document.getElementById('res-document');
     const finderCtaBtn = document.getElementById('finder-cta-btn');
 
-    // Database containing specific details for all 16 German states
+    // Database containing specific details for all 16 German states (bilingual)
     const bundeslandData = {
         nw: {
-            title: "Nordrhein-Westfalen (NRW)",
-            status: "Anerkannt",
+            title: isEn ? "North Rhine-Westphalia (NRW)" : "Nordrhein-Westfalen (NRW)",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid NRW (5 Tage)",
-            desc: "Das Seminar ist in NRW voll anerkannt. Arbeitnehmer haben Anspruch auf 5 Arbeitstage Freistellung pro Kalenderjahr. Bitte reichen Sie den Antrag mind. 6 Wochen vor Seminarbeginn bei Ihrem Arbeitgeber ein."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate NRW (5 days)" : "Anerkennungsbescheid NRW (5 Tage)",
+            desc: isEn 
+                ? "The seminar is fully recognized in NRW. Employees are entitled to 5 working days of educational leave per calendar year. Please submit the application to your employer at least 6 weeks before the seminar begins."
+                : "Das Seminar ist in NRW voll anerkannt. Arbeitnehmer haben Anspruch auf 5 Arbeitstage Freistellung pro Kalenderjahr. Bitte reichen Sie den Antrag mind. 6 Wochen vor Seminarbeginn bei Ihrem Arbeitgeber ein."
         },
         he: {
-            title: "Hessen",
-            status: "Anerkannt",
+            title: isEn ? "Hesse" : "Hessen",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Hessen (5 Tage)",
-            desc: "In Hessen ist unser Programm vollständig freigabefähig. Sie können bis zu 5 Tage für dieses Retreat beanspruchen. Denken Sie an die gesetzliche 6-Wochen-Frist für Ihren Arbeitgeber."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Hesse (5 days)" : "Anerkennungsbescheid Hessen (5 Tage)",
+            desc: isEn 
+                ? "In Hesse, our program is fully eligible for release. You can claim up to 5 days for this retreat. Keep in mind the statutory 6-week notice period for your employer."
+                : "In Hessen ist unser Programm vollständig freigabefähig. Sie können bis zu 5 Tage für dieses Retreat beanspruchen. Denken Sie an die gesetzliche 6-Wochen-Frist für Ihren Arbeitgeber."
         },
         bw: {
             title: "Baden-Württemberg",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "8 Wochen vor Beginn",
-            document: "Anerkennungsbescheid BW (Ref. VO-2026)",
-            desc: "Baden-Württemberg hat strenge formelle Richtlinien, denen unser Kurs jedoch voll entspricht. Wichtig: Der Antrag muss schriftlich mindestens 8 Wochen vor Kursbeginn vorliegen."
+            deadline: isEn ? "8 weeks before start" : "8 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate BW (Ref. VO-2026)" : "Anerkennungsbescheid BW (Ref. VO-2026)",
+            desc: isEn 
+                ? "Baden-Württemberg has strict formal guidelines, which our course, however, fully meets. Important: The application must be submitted in writing at least 8 weeks before the start of the course."
+                : "Baden-Württemberg hat strenge formelle Richtlinien, denen unser Kurs jedoch voll entspricht. Wichtig: Der Antrag muss schriftlich mindestens 8 Wochen vor Kursbeginn vorliegen."
         },
         by: {
-            title: "Bayern",
-            status: "Kein Gesetz",
+            title: isEn ? "Bavaria" : "Bayern",
+            status: isEn ? "No Law" : "Kein Gesetz",
             badgeClass: "badge-warning",
-            deadline: "Individuelle Absprache",
-            document: "Förder- & Motivationsfibel Bayern",
-            desc: "Bayern hat als eines von zwei Bundesländern kein eigenes Bildungsurlaubsgesetz. Dennoch genehmigen bayerische Arbeitgeber die Teilnahme oft auf freiwilliger Basis (z.B. als betriebliche Weiterbildung). Wir stellen Ihnen hierfür eine spezielle Argumentationshilfe zur Verfügung."
+            deadline: isEn ? "Individual arrangement" : "Individuelle Absprache",
+            document: isEn ? "Advocacy & Motivation Guide Bavaria" : "Förder- & Motivationsfibel Bayern",
+            desc: isEn 
+                ? "Bavaria is one of two federal states without its own educational leave law. However, Bavarian employers often approve participation on a voluntary basis (e.g., as professional training). We provide you with a special advocacy guide for this purpose."
+                : "Bayern hat als eines von zwei Bundesländern kein eigenes Bildungsurlaubsgesetz. Dennoch genehmigen bayerische Arbeitgeber die Teilnahme oft auf freiwilliger Basis (z.B. als betriebliche Weiterbildung). Wir stellen Ihnen hierfür eine spezielle Argumentationshilfe zur Verfügung."
         },
         be: {
             title: "Berlin",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Berlin",
-            desc: "Berliner Arbeitnehmer können problemlos teilnehmen. Die Weiterbildungsmaßnahme erfüllt alle Kriterien des Berliner Bildungszeitgesetzes (BiZg)."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Berlin" : "Anerkennungsbescheid Berlin",
+            desc: isEn 
+                ? "Employees in Berlin can participate without any problems. The educational activity meets all criteria of the Berlin Educational Time Act (BiZg)."
+                : "Berliner Arbeitnehmer können problemlos teilnehmen. Die Weiterbildungsmaßnahme erfüllt alle Kriterien des Berliner Bildungszeitgesetzes (BiZg)."
         },
         hh: {
             title: "Hamburg",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Hamburg (5 Tage)",
-            desc: "Hamburgische Arbeitnehmer haben vollen gesetzlichen Anspruch. Ideal als zertifizierte Präventionsmaßnahme zur mentalen Gesundheit absetzbar."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Hamburg (5 days)" : "Anerkennungsbescheid Hamburg (5 Tage)",
+            desc: isEn 
+                ? "Hamburg employees have a full legal entitlement. Ideal as a certified mental health prevention measure and fully tax-deductible."
+                : "Hamburgische Arbeitnehmer haben vollen gesetzlichen Anspruch. Ideal als zertifizierte Präventionsmaßnahme zur mentalen Gesundheit absetzbar."
         },
         ni: {
-            title: "Niedersachsen",
-            status: "Anerkannt",
+            title: isEn ? "Lower Saxony" : "Niedersachsen",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "4 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Niedersachsen",
-            desc: "In Niedersachsen profitieren Sie von einer verkürzten Antragsfrist von 4 Wochen. Das Programm ist nach dem NBildUG offiziell anerkannt."
+            deadline: isEn ? "4 weeks before start" : "4 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Lower Saxony" : "Anerkennungsbescheid Niedersachsen",
+            desc: isEn 
+                ? "In Lower Saxony, you benefit from a shortened application period of 4 weeks. The program is officially recognized under the NBildUG."
+                : "In Niedersachsen profitieren Sie von einer verkürzten Antragsfrist von 4 Wochen. Das Programm ist nach dem NBildUG offiziell anerkannt."
         },
         rp: {
-            title: "Rheinland-Pfalz",
-            status: "Anerkannt",
+            title: isEn ? "Rhineland-Palatinate" : "Rheinland-Pfalz",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid RLP",
-            desc: "Vollständige staatliche Anerkennung liegt vor. Nutzen Sie Ihre 5 Tage bezahlten Sonderurlaub für nachhaltige Resilienzstärkung an der Ägäis."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate RLP" : "Anerkennungsbescheid RLP",
+            desc: isEn 
+                ? "Full state recognition is available. Use your 5 days of paid special leave for sustainable resilience strengthening on the Aegean."
+                : "Vollständige staatliche Anerkennung liegt vor. Nutzen Sie Ihre 5 Tage bezahlten Sonderurlaub für nachhaltige Resilienzstärkung an der Ägäis."
         },
         sl: {
             title: "Saarland",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Saarland (SBUG)",
-            desc: "Anerkannt nach dem saarländischen Bildungsfreistellungsgesetz. Sichern Sie sich die Freistellung unkompliziert."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Saarland (SBUG)" : "Anerkennungsbescheid Saarland (SBUG)",
+            desc: isEn 
+                ? "Recognized under the Saarland Educational Leave Act. Secure your educational leave easily."
+                : "Anerkannt nach dem saarländischen Bildungsfreistellungsgesetz. Sichern Sie sich die Freistellung unkompliziert."
         },
         sh: {
             title: "Schleswig-Holstein",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid SH (WBFG)",
-            desc: "Die schleswig-holsteinische Landesregierung erkennt unseren Kurs vollumfänglich an. Dokumente zur Vorlage bei der Personalabteilung erhalten Sie direkt bei uns."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate SH (WBFG)" : "Anerkennungsbescheid SH (WBFG)",
+            desc: isEn 
+                ? "The Schleswig-Holstein state government fully recognizes our course. You will receive documents to present to your HR department directly from us."
+                : "Die schleswig-holsteinische Landesregierung erkennt unseren Kurs vollumfänglich an. Dokumente zur Vorlage bei der Personalabteilung erhalten Sie direkt bei uns."
         },
         sn: {
-            title: "Sachsen",
-            status: "Kein Gesetz",
+            title: isEn ? "Saxony" : "Sachsen",
+            status: isEn ? "No Law" : "Kein Gesetz",
             badgeClass: "badge-warning",
-            deadline: "Individuelle Absprache",
-            document: "Fördermappe Sachsen (Freistellungs-Leitfaden)",
-            desc: "In Sachsen gibt es leider kein Bildungsurlaubsgesetz. Sie können aber mit unserem detaillierten Verlaufsplan eine Freistellung im Rahmen der betrieblichen Gesundheitsförderung (BGF) anfragen. Wir beraten Sie gern!"
+            deadline: isEn ? "Individual arrangement" : "Individuelle Absprache",
+            document: isEn ? "Saxony Funding Portfolio (Leave Guide)" : "Fördermappe Sachsen (Freistellungs-Leitfaden)",
+            desc: isEn 
+                ? "Unfortunately, there is no educational leave law in Saxony. However, you can request leave within the framework of workplace health promotion (WGF) using our detailed course schedule. We are happy to advise you!"
+                : "In Sachsen gibt es leider kein Bildungsurlaubsgesetz. Sie können aber mit unserem detaillierten Verlaufsplan eine Freistellung im Rahmen der betrieblichen Gesundheitsförderung (BGF) anfragen. Wir beraten Sie gern!"
         },
         st: {
-            title: "Sachsen-Anhalt",
-            status: "Anerkannt",
+            title: isEn ? "Saxony-Anhalt" : "Sachsen-Anhalt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Sachsen-Anhalt",
-            desc: "Vollständig anerkannt nach dem Bildungsfreistellungsgesetz von Sachsen-Anhalt. Nutzen Sie Ihren Anspruch auf berufliche Fortbildung."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Saxony-Anhalt" : "Anerkennungsbescheid Saxony-Anhalt",
+            desc: isEn 
+                ? "Fully recognized under the Saxony-Anhalt Educational Leave Act. Take advantage of your entitlement to professional training."
+                : "Vollständig anerkannt nach dem Bildungsfreistellungsgesetz von Sachsen-Anhalt. Nutzen Sie Ihren Anspruch auf berufliche Fortbildung."
         },
         th: {
-            title: "Thüringen",
-            status: "Anerkannt",
+            title: isEn ? "Thuringia" : "Thüringen",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "8 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Thüringen (ThürBfG)",
-            desc: "Offiziell anerkannt in Thüringen. Bitte beachten Sie die 8-wöchige gesetzliche Vorlagefrist bei Ihrem Arbeitgeber."
+            deadline: isEn ? "8 weeks before start" : "8 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Thuringia (ThürBfG)" : "Anerkennungsbescheid Thüringen (ThürBfG)",
+            desc: isEn 
+                ? "Officially recognized in Thuringia. Please note the 8-week statutory presentation period to your employer."
+                : "Offiziell anerkannt in Thüringen. Bitte beachten Sie die 8-wöchige gesetzliche Vorlagefrist bei Ihrem Arbeitgeber."
         },
         hb: {
             title: "Bremen",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "4 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Bremen (BremBUG)",
-            desc: "Bremer Arbeitnehmer können mit einer kurzen Frist von 4 Wochen einreichen. Volle gesetzliche Freistellung garantiert."
+            deadline: isEn ? "4 weeks before start" : "4 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Bremen (BremBUG)" : "Anerkennungsbescheid Bremen (BremBUG)",
+            desc: isEn 
+                ? "Bremen employees can submit with a short period of 4 weeks. Full legal leave guaranteed."
+                : "Bremer Arbeitnehmer können mit einer kurzen Frist von 4 Wochen einreichen. Volle gesetzliche Freistellung garantiert."
         },
         mv: {
             title: "Mecklenburg-Vorpommern",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "8 Wochen vor Beginn",
-            document: "Anerkennungsbescheid MV (BfG M-V)",
-            desc: "Unser Kurs ist in Mecklenburg-Vorpommern staatlich zertifiziert. Aufgrund der 8-Wochen-Frist empfehlen wir eine frühzeitige Beantragung."
+            deadline: isEn ? "8 weeks before start" : "8 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate MV (BfG M-V)" : "Anerkennungsbescheid MV (BfG M-V)",
+            desc: isEn 
+                ? "Our course is state-certified in Mecklenburg-Vorpommern. Due to the 8-week notice period, we recommend early application."
+                : "Unser Kurs ist in Mecklenburg-Vorpommern staatlich zertifiziert. Aufgrund der 8-Wochen-Frist empfehlen wir eine frühzeitige Beantragung."
         },
         bb: {
             title: "Brandenburg",
-            status: "Anerkannt",
+            status: isEn ? "Recognized" : "Anerkannt",
             badgeClass: "",
-            deadline: "6 Wochen vor Beginn",
-            document: "Anerkennungsbescheid Brandenburg (BbgBUG)",
-            desc: "Brandenburger Angestellte haben einen gesetzlich gesicherten Freistellungsanspruch. Sämtliche Nachweise stellen wir Ihnen lückenlos aus."
+            deadline: isEn ? "6 weeks before start" : "6 Wochen vor Beginn",
+            document: isEn ? "Recognition Certificate Brandenburg (BbgBUG)" : "Anerkennungsbescheid Brandenburg (BbgBUG)",
+            desc: isEn 
+                ? "Brandenburg employees have a legally secured entitlement to leave. We will provide you with all verification documents without any gaps."
+                : "Brandenburger Angestellte haben einen gesetzlich gesicherten Freistellungsanspruch. Sämtliche Nachweise stellen wir Ihnen lückenlos aus."
         }
     };
 
@@ -507,6 +540,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + 'px';
             }
+        });
+    });
+
+
+    /* ==========================================
+       9. HASH-PRESERVING LANGUAGE SWITCHER
+       ========================================== */
+    const langLinks = document.querySelectorAll('.lang-btn');
+    langLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetUrl = link.getAttribute('href');
+            const currentHash = window.location.hash || '';
+            
+            // Navigate preserving the SPA anchor hash
+            window.location.href = targetUrl + currentHash;
         });
     });
 
