@@ -2426,6 +2426,10 @@ p {
     margin-right: 1.25rem;
 }
 
+.main-navigation .language-switcher {
+    display: none; /* Hide in desktop navigation list */
+}
+
 .lang-btn {
     color: rgba(255, 255, 255, 0.6);
     cursor: pointer;
@@ -2453,6 +2457,7 @@ p {
 /* Mobile Language Switcher Drawer Integration */
 @media (max-width: 1024px) {
     .main-navigation .language-switcher {
+        display: flex; /* Show in mobile drawer at bottom */
         margin: 2rem 0 0 0;
         padding-top: 1.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.08);
