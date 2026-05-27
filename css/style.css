@@ -700,7 +700,8 @@ p {
     
     .megamenu {
         position: static;
-        transform: none;
+        transform: none !important;
+        left: auto;
         width: 100%;
         opacity: 1;
         pointer-events: auto;
@@ -711,7 +712,10 @@ p {
         display: none;
     }
     
-    .nav-item:hover .megamenu,
+    .nav-item:hover .megamenu {
+        transform: none !important;
+    }
+    
     .nav-item.mobile-expand .megamenu {
         display: block;
     }
