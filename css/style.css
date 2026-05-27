@@ -711,6 +711,7 @@ p {
         display: none;
     }
     
+    .nav-item:hover .megamenu,
     .nav-item.mobile-expand .megamenu {
         display: block;
     }
