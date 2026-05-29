@@ -448,26 +448,94 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             if (validatePane(`w-pane-${currentStep}`)) {
-                // Fetch user data for the final dynamic success pane
-                const firstName = document.getElementById('w-fname').value.trim();
-                const termSelect = document.getElementById('w-term');
-                const termText = termSelect.options[termSelect.selectedIndex].text.split(' - ')[0];
-                const packageSelect = document.getElementById('w-package');
-                const packageText = packageSelect.options[packageSelect.selectedIndex].text.split(' (€')[0];
-                const stateSelect = document.getElementById('w-state');
-                const stateText = stateSelect.options[stateSelect.selectedIndex].text.split(' (')[0];
-
-                // Inject variables into Step 4
-                document.getElementById('dyn-fname').textContent = firstName;
-                document.getElementById('dyn-package').textContent = packageText;
-                document.getElementById('dyn-date').textContent = termText;
-                document.getElementById('dyn-state').textContent = stateText;
-
-                // Advance to success pane
-                showStep(4);
+                // Get submit button and original state
+                const submitBtn = wizardForm.querySelector('.btn-submit-form');
+                const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
                 
-                // Clear inputs except success
-                wizardForm.reset();
+                // Determine current language
+                const isEn = document.documentElement.lang === 'en';
+
+                // Fetch user data
+                const firstName = document.getElementById('w-fname').value.trim();
+                const lastName = document.getElementById('w-lname').value.trim();
+                const email = document.getElementById('w-email').value.trim();
+                const phone = document.getElementById('w-phone').value.trim();
+
+                const termSelect = document.getElementById('w-term');
+                const termText = termSelect.options[termSelect.selectedIndex].text;
+                const termShortText = termText.split(' - ')[0];
+
+                const packageSelect = document.getElementById('w-package');
+                const packageText = packageSelect.options[packageSelect.selectedIndex].text;
+                const packageShortText = packageText.split(' (€')[0];
+
+                const stateSelect = document.getElementById('w-state');
+                const stateText = stateSelect.options[stateSelect.selectedIndex].text;
+                const stateShortText = stateText.split(' (')[0];
+
+                const employerHelp = document.getElementById('w-employer-help').checked;
+
+                // Construct payload for FormSubmit
+                const payload = {
+                    "_subject": isEn ? `Bildungsurlaub Inquiry [EN] - ${firstName} ${lastName}` : `Bildungsurlaub Anfrage [DE] - ${firstName} ${lastName}`,
+                    "_captcha": "false",
+                    "_honey": "",
+                    "Vorname / First Name": firstName,
+                    "Nachname / Last Name": lastName,
+                    "E-Mail / Email": email,
+                    "Telefon / Phone": phone,
+                    "Termin / Date": termText,
+                    "Zimmerkategorie / Package": packageText,
+                    "Bundesland / State": stateText,
+                    "Arbeitgeber-Unterstützung / Employer Support": employerHelp ? (isEn ? "Yes" : "Ja") : (isEn ? "No" : "Nein")
+                };
+
+                // Show dynamic loading state in the button
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = isEn 
+                        ? 'Sending... <i class="fa-solid fa-circle-notch fa-spin"></i>' 
+                        : 'Wird gesendet... <i class="fa-solid fa-circle-notch fa-spin"></i>';
+                }
+
+                // Send data using FormSubmit AJAX
+                fetch('https://formsubmit.co/ajax/info@webtech-agentur.de', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => {
+                    console.log('FormSubmit response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('FormSubmit response data:', data);
+                })
+                .catch(error => {
+                    console.error('Error submitting form data:', error);
+                })
+                .finally(() => {
+                    // Inject variables into Step 4
+                    document.getElementById('dyn-fname').textContent = firstName;
+                    document.getElementById('dyn-package').textContent = packageShortText;
+                    document.getElementById('dyn-date').textContent = termShortText;
+                    document.getElementById('dyn-state').textContent = stateShortText;
+
+                    // Reset button state
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnHTML;
+                    }
+
+                    // Advance to success pane
+                    showStep(4);
+                    
+                    // Clear inputs except success
+                    wizardForm.reset();
+                });
             }
         });
     }
