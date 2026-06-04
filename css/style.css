@@ -2285,6 +2285,15 @@ p {
     padding: 3rem;
 }
 
+@media (max-width: 1024px) {
+    .contact-wizard-container {
+        order: 1;
+    }
+    .contact-sidebar {
+        order: 2;
+    }
+}
+
 .wizard-header {
     border-bottom: 1px solid var(--color-cream);
     padding-bottom: 2rem;

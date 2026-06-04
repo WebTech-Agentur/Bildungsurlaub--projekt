@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resDocument.textContent = data.document;
 
                 // Adjust CTA button target so it includes the state
-                finderCtaBtn.setAttribute('href', `#kontakt`);
+                finderCtaBtn.setAttribute('href', '#kontakt#inquiry-wizard-container');
                 finderCtaBtn.addEventListener('click', () => {
                     const wizardStateSelect = document.getElementById('w-state');
                     if (wizardStateSelect) {
