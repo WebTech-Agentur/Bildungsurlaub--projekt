@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link, .footer-links a, .logo');
     
     function navigateToHash() {
+        if (sections.length === 0) return;
         const fullHash = window.location.hash || '#home';
         // Handle sub-target anchors in the URL like #bildungsurlaub#bu-finder
         const hashParts = fullHash.split('#');
