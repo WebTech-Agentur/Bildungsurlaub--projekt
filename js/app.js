@@ -92,6 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileToggle.classList.toggle('open');
             mainNav.classList.toggle('mobile-active');
         });
+
+        // Close drawer when clicking any link inside the mobile menu
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // If it's a mobile expand chevron click, do not close the menu
+                if (e.target.classList.contains('nav-chevron') || e.target.closest('.nav-chevron')) {
+                    return;
+                }
+                mobileToggle.classList.remove('open');
+                mainNav.classList.remove('mobile-active');
+            });
+        });
     }
 
     // Accordion expand for mega-menu elements on mobile

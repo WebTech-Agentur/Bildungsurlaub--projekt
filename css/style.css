@@ -994,10 +994,36 @@ p {
 
 @media (max-width: 768px) {
     .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
         justify-content: center;
     }
     .trust-divider {
         display: none;
+    }
+    .trust-item {
+        min-width: 0;
+        text-align: center;
+    }
+    .trust-number {
+        font-size: 1.6rem;
+    }
+    .trust-label {
+        font-size: 0.65rem;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .trust-grid {
+        gap: 1rem;
+    }
+    .trust-number {
+        font-size: 1.4rem;
+    }
+    .trust-label {
+        font-size: 0.6rem;
     }
 }
 
@@ -1053,10 +1079,30 @@ p {
     backdrop-filter: blur(10px);
 }
 
+.card-light {
+    background: var(--color-white);
+    border: 1px solid rgba(15, 36, 26, 0.06);
+    box-shadow: var(--shadow-premium);
+}
+
+.card-light h3 {
+    color: var(--color-dark-green) !important;
+}
+
+.card-light p {
+    color: var(--color-text-muted) !important;
+}
+
 .concept-card:hover {
     transform: translateY(-8px);
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-hover);
+}
+
+.concept-card.card-light:hover {
+    background: var(--color-white);
+    border-color: var(--color-sage);
     box-shadow: var(--shadow-hover);
 }
 
@@ -1986,19 +2032,21 @@ p {
 
 .inclusions-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    text-align: left;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+    text-align: center;
 }
 
 .inc-card {
     background: var(--color-white);
     border-radius: 8px;
-    padding: 2.5rem 2rem;
+    padding: 3rem 2.5rem;
     box-shadow: var(--shadow-premium);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     transition: var(--transition-smooth);
     border: 1px solid rgba(15, 36, 26, 0.04);
 }
@@ -2010,16 +2058,16 @@ p {
 }
 
 .inc-icon-wrap {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
     background-color: var(--color-sage-light);
     color: var(--color-sage);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
     transition: var(--transition-smooth);
 }
 
@@ -2030,26 +2078,97 @@ p {
 
 .inc-card-content strong {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: var(--color-dark-green);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     font-weight: 600;
 }
 
 .inc-card-content p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Exclusions Grid (Nicht enthaltene Leistungen) */
+.exclusions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: left;
+    margin-top: 3rem;
+}
+
+.ex-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(15, 36, 26, 0.04);
+}
+
+.ex-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(212, 122, 106, 0.4);
+}
+
+.ex-icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: #FDF3F1;
+    color: #D47A6A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    transition: var(--transition-smooth);
+}
+
+.ex-card:hover .ex-icon-wrap {
+    background-color: #D47A6A;
+    color: var(--color-white);
+}
+
+.ex-card-content strong {
+    display: block;
+    font-size: 1.05rem;
+    color: var(--color-dark-green);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.ex-card-content p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
 }
 
 @media (max-width: 1024px) {
     .inclusions-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .exclusions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .inclusions-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 600px) {
-    .inclusions-grid {
+    .exclusions-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -2534,6 +2653,18 @@ p {
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         width: 100%;
         justify-content: flex-start;
+    }
+}
+
+.main-navigation .mobile-menu-cta {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .main-navigation .mobile-menu-cta {
+        display: block;
+        margin-top: 1.5rem;
+        width: 100%;
     }
 }
 
